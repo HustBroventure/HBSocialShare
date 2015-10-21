@@ -10,6 +10,9 @@
 
 #define BG_COLOR  [[UIColor blackColor] colorWithAlphaComponent:0.3];
 #define CONTAINER_HEIGHT  (300.0f)
+
+#define BUTTON_HEIGHT  (44.0f)
+
 @interface HBSocialShareView()
 @property (nonatomic, strong) UIView* containerView;
 @property (nonatomic, strong) UILabel* topInfoLabel;
@@ -85,6 +88,13 @@
         [self removeFromSuperview];
     }];
 }
+-(UIButton*)createItemButtonWithTitle:(NSString*)title andImageName:(NSString*)imageName
+{
+    UIButton* item = [UIButton buttonWithType:UIButtonTypeCustom];
+    
+    
+    return item;
+}
 #pragma mark - property-setter-getter
 
 
@@ -102,11 +112,34 @@
 -(UIView *)containerView
 {
     if (!_containerView) {
+    
         _containerView = [[UIView alloc]initWithFrame:CGRectMake(0, _height, _width,CONTAINER_HEIGHT)];
         _containerView.backgroundColor = [UIColor whiteColor];
 
     }
     return _containerView;
+}
+-(UIButton *)cancleButton
+{
+    if (!_cancleButton) {
+        _cancleButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        [_cancleButton setTitle:@"取消" forState:UIControlStateNormal];
+        [ _cancleButton setBackgroundColor:[UIColor colorWithWhite:0.9 alpha:0.9]];
+        //[_cancleButton setBackgroundImage:<#(UIImage *)#> forState:<#(UIControlState)#>]
+        [_cancleButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        _cancleButton.frame = CGRectMake(0,CONTAINER_HEIGHT - BUTTON_HEIGHT, _width, BUTTON_HEIGHT);
+        [_cancleButton addTarget:self action:@selector(dismissSheet) forControlEvents:UIControlEventTouchUpInside];
+    }
+    return _cancleButton;
+}
+-(UILabel *)topInfoLabel
+{
+    if (!_topInfoLabel) {
+        _topInfoLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 0,_width ,BUTTON_HEIGHT)];
+        _topInfoLabel.textAlignment = NSTextAlignmentCenter;
+        _topInfoLabel.text = @"分享";
+    }
+    return _topInfoLabel;
 }
 -(UITapGestureRecognizer *)tap
 {
@@ -114,5 +147,15 @@
         _tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(dismissSheet)];
     }
     return _tap;
+}
+-(UIScrollView *)scrollView
+{
+    if (!_scrollView) {
+        _scrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(0, BUTTON_HEIGHT, _width,CONTAINER_HEIGHT - BUTTON_HEIGHT * 2)];
+        _scrollView.backgroundColor =  [UIColor colorWithWhite:0.8 alpha:0.9];
+
+
+    }
+    return _scrollView;
 }
 @end
