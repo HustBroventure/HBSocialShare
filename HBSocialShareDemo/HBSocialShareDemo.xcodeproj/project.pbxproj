@@ -15,6 +15,7 @@
 		0A67195E1BD74B26003827DF /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0A67195C1BD74B26003827DF /* LaunchScreen.xib */; };
 		0A67196A1BD74B26003827DF /* HBSocialShareDemoTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A6719691BD74B26003827DF /* HBSocialShareDemoTests.m */; };
 		0A6719761BD74B89003827DF /* HBSocialShareView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A6719751BD74B89003827DF /* HBSocialShareView.m */; };
+		0AEC3CF21BDE77B8004093AD /* HBShareManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AEC3CF11BDE77B8004093AD /* HBShareManager.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -43,6 +44,8 @@
 		0A6719691BD74B26003827DF /* HBSocialShareDemoTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HBSocialShareDemoTests.m; sourceTree = "<group>"; };
 		0A6719741BD74B89003827DF /* HBSocialShareView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HBSocialShareView.h; sourceTree = "<group>"; };
 		0A6719751BD74B89003827DF /* HBSocialShareView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HBSocialShareView.m; sourceTree = "<group>"; };
+		0AEC3CF01BDE77B8004093AD /* HBShareManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HBShareManager.h; sourceTree = "<group>"; };
+		0AEC3CF11BDE77B8004093AD /* HBShareManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HBShareManager.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -128,6 +131,8 @@
 			children = (
 				0A6719741BD74B89003827DF /* HBSocialShareView.h */,
 				0A6719751BD74B89003827DF /* HBSocialShareView.m */,
+				0AEC3CF01BDE77B8004093AD /* HBShareManager.h */,
+				0AEC3CF11BDE77B8004093AD /* HBShareManager.m */,
 			);
 			path = HBSocialShare;
 			sourceTree = "<group>";
@@ -236,6 +241,7 @@
 				0A6719761BD74B89003827DF /* HBSocialShareView.m in Sources */,
 				0A6719531BD74B26003827DF /* AppDelegate.m in Sources */,
 				0A6719501BD74B26003827DF /* main.m in Sources */,
+				0AEC3CF21BDE77B8004093AD /* HBShareManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -430,6 +436,7 @@
 				0A67196F1BD74B26003827DF /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		0A6719701BD74B26003827DF /* Build configuration list for PBXNativeTarget "HBSocialShareDemoTests" */ = {
 			isa = XCConfigurationList;
@@ -438,6 +445,7 @@
 				0A6719721BD74B26003827DF /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

@@ -7,13 +7,16 @@
 //
 
 #import "HBSocialShareView.h"
-
+    //背景色
 #define BG_COLOR  [[UIColor blackColor] colorWithAlphaComponent:0.3];
-#define CONTAINER_HEIGHT  (300.0f)
-
+    //sheet高度
+#define CONTAINER_HEIGHT  (190.0f)
+    //按钮高度
 #define BUTTON_HEIGHT  (44.0f)
+    //按钮高度
+#define ITEM_WIDTH  (80.0f)
 
-@interface HBSocialShareView()
+@interface HBSocialShareView()<UIGestureRecognizerDelegate>
 @property (nonatomic, strong) UIView* containerView;
 @property (nonatomic, strong) UILabel* topInfoLabel;
 @property (nonatomic, strong) UIButton* cancleButton;
@@ -35,7 +38,10 @@
 -(instancetype)init
 {
     if (self = [super init]) {
+        [self initData];
         [self initSubView];
+        [self setItems];
+
         
     }
     return self;
@@ -48,6 +54,10 @@
 }
 
 #pragma mark - private-tools methords
+-(void)initData
+{
+    _itemTitleArray = @[@"微信",@"微信朋友圈",@"qq好友",@"qq空间",@"新浪微博",@"短信",@"邮箱",@"复制链接"];
+}
 -(void)initSubView
 {
         //一开始显示透明颜色
@@ -60,6 +70,34 @@
     [self.containerView addSubview:self.scrollView];
     [self.containerView addSubview:self.cancleButton];
     [self addSubview:self.containerView];
+
+}
+-(void)setItems
+{
+    for (int i = 0; i < _itemTitleArray.count; i++) {
+        UIButton* button = [UIButton buttonWithType:UIButtonTypeCustom];
+        button.backgroundColor = [UIColor blueColor];
+        button.frame = CGRectMake(i * ITEM_WIDTH +10*(i+1) , 0, ITEM_WIDTH, ITEM_WIDTH);
+        button.layer.cornerRadius = 4.0f;
+        button.layer.masksToBounds = YES;
+        [self.scrollView addSubview:button];
+
+
+
+        UILabel* title = [[UILabel alloc]initWithFrame:CGRectMake(button.frame.origin.x, button.frame.origin.y + ITEM_WIDTH + 5 , ITEM_WIDTH, 10)];
+        title.text = _itemTitleArray[i];
+        title.textAlignment = NSTextAlignmentCenter;
+        title.font = [UIFont systemFontOfSize:12];
+        title.adjustsFontSizeToFitWidth = YES;
+        [self.scrollView addSubview:title];
+
+
+
+
+    }
+    self.scrollView.contentSize = CGSizeMake((ITEM_WIDTH +10)*_itemTitleArray.count +10, 0);
+
+
 
 }
 -(void)showSheet
@@ -115,6 +153,14 @@
     
         _containerView = [[UIView alloc]initWithFrame:CGRectMake(0, _height, _width,CONTAINER_HEIGHT)];
         _containerView.backgroundColor = [UIColor whiteColor];
+//        UIVisualEffectView *visualEffect = [[UIVisualEffectView alloc]initWithEffect:[UIBlurEffect effectWithStyle:UIBlurEffectStyleExtraLight]];
+//
+//        visualEffect.frame = _containerView.bounds;
+//
+//        visualEffect.alpha = 0.9;
+//            //visualEffect.backgroundColor = [UIColor redColor];
+//
+//        [_containerView addSubview:visualEffect];
 
     }
     return _containerView;
@@ -145,6 +191,7 @@
 {
     if (!_tap) {
         _tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(dismissSheet)];
+        _tap.delegate = self;
     }
     return _tap;
 }
@@ -152,10 +199,19 @@
 {
     if (!_scrollView) {
         _scrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(0, BUTTON_HEIGHT, _width,CONTAINER_HEIGHT - BUTTON_HEIGHT * 2)];
-        _scrollView.backgroundColor =  [UIColor colorWithWhite:0.8 alpha:0.9];
+            _scrollView.backgroundColor =  [UIColor whiteColor];
 
 
     }
     return _scrollView;
+}
+
+-(BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch
+{
+    CGPoint point = [touch locationInView:self];
+    if (point.y < self.frame.size.height -  CONTAINER_HEIGHT) {
+        return YES;
+    }
+    return NO;
 }
 @end
